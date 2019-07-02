@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctxPath}/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="${ctxPath}/static/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="${ctxPath}/static/layui/css/layui.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/animate.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/style.css">
+    <script src="${ctxPath}/static/js/jquery.min.js"></script>
+    <script src="${ctxPath}/static/bootstrap/js/bootstrap.js"></script>
+    <script src="${ctxPath}/static/bootstrap-table/bootstrap-table.js"></script>
+
+</head>
+<body>
+<div class="form-horizontal col-md-10" style="margin:0 auto;float: none;">
+<div class="tabs-container" style="margin-top:20px;">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">表信息差异</a>
+        </li>
+        <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">列信息差异</a>
+        </li>
+        <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">索引信息差异</a>
+        </li>
+        <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">函数过程信息差异</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div id="mysqlDiffTab"></div>
+            </div>
+        </div>
+        <div id="tab-2" class="tab-pane">
+            <div class="panel-body">
+                <div id="mysqlDiffCol"></div>
+            </div>
+        </div>
+        <div id="tab-3" class="tab-pane">
+            <div class="panel-body">
+                <div id="mysqlDiffIndex"></div>
+            </div>
+        </div>
+        <div id="tab-4" class="tab-pane">
+            <div class="panel-body">
+                <div id="mysqlDiffRoutine"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="col-md-10" style="margin:0 auto;float: none;">
+    <div style="margin-top:20px;">
+        <button type="button" class="btn btn-success" onclick="exportDif()">导出Excel</button>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var tab=eval('${diffTabList}');
+    var col=eval('${diffColList}');
+    var index=eval('${diffIndexList}');
+    var routine=eval('${diffRoutineList}');
+    $('#mysqlDiffTab').bootstrapTable({
+        data:tab,
+        columns: [{
+            field: 'TABLE_NAME1',
+            title: '数据库1表名称',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'TABLE_NAME2',
+            title: '数据库2表名称',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'TABLE_COMMENT',
+            title: '表注释',
+            align: 'center',
+            valign: 'middle',
+        }]
+    });
+    $('#mysqlDiffCol').bootstrapTable({
+        data:col,
+        columns: [{
+            field: 'TABLE_NAME',
+            title: '表名称',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMN_NAME1',
+            title: '数据库1表列',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMN_NAME2',
+            title: '数据库2表列',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMN_TYPE',
+            title: '列类型',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'IS_NULLABLE',
+            title: '是否可为空',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMN_KEY',
+            title: 'KEY属性',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'EXTRA',
+            title: '自增长属性差异',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMN_COMMENT',
+            title: '列注释',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMN_DEFAULT',
+            title: '默认值',
+            align: 'center',
+            valign: 'middle',
+        }]
+    });
+    $('#mysqlDiffIndex').bootstrapTable({
+        data:index,
+        columns: [{
+            field: 'TABLE_NAME',
+            title: '表名称',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'INDEX_NAME1',
+            title: '数据库1表索引',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'INDEX_NAME2',
+            title: '数据库2表索引',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'COLUMNS',
+            title: '索引涉及的列',
+            align: 'center',
+            valign: 'middle',
+        }]
+    });
+    $('#mysqlDiffRoutine').bootstrapTable({
+        data:routine,
+        columns: [{
+            field: 'ROUTINE_NAME1',
+            title: '数据库1函数',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'ROUTINE_NAME2',
+            title: '数据库2函数',
+            align: 'center',
+            valign: 'middle',
+        },{
+            field: 'ROUTINE_TYPE',
+            title: '函数类型',
+            align: 'center',
+            valign: 'middle',
+        }]
+    });
+    var ctxPath = '${ctxPath}';
+    function exportDif(){
+        window.location.href=ctxPath+"/mysqlDif/export";
+    }
+</script>

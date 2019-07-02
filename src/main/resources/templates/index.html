@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="${ctxPath}/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="${ctxPath}/static/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="${ctxPath}/static/layui/css/layui.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/animate.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/style.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/toastr.css">
+    <script src="${ctxPath}/static/js/jquery.min.js"></script>
+    <script src="${ctxPath}/static/js/toastr.js"></script>
+    <script src="${ctxPath}/static/bootstrap/js/bootstrap.js"></script>
+    <script src="${ctxPath}/static/layer/layer.js"></script>
+    <script src="${ctxPath}/static/bootstrap-table/bootstrap-table.js"></script>
+    <script src="${ctxPath}/static/js/mysqlDif.js"></script>
+    <style>
+        input {
+            width:100%;
+            line-height:25px;
+        }
+    </style>
+    <script>
+        var ctxPath = '${ctxPath}';
+    </script>
+</head>
+<body>
+<div class="row">
+    <div class="form-horizontal col-md-10" style="margin:0 auto;float: none;">
+        <div class="col-md-5" style="margin-top:20px;">
+            <table class="table table-bordered">
+                <tr><td>数据库1地址:</td><td><input type="text" id="url1" value="jdbc:mysql://172.16.110.238:548/znkf_new"/></td></tr>
+                <tr><td>用户名:</td><td><input type="text" id="name1" value="znkf_new_user"/></td></tr>
+                <tr><td>密码:</td><td><input type="password" id="pwd1" value="LyTest,.2018"/></td></tr>
+            </table>
+            <button type="button" class="btn btn-success" onclick="Mysql1Connect()">测试连接</button>
+        </div>
+
+        <div class="col-md-5" style="margin-top:20px;">
+           <table class="table table-bordered">
+               <tr><td>数据库2地址:</td><td><input type="text" id="url2" value="jdbc:mysql://172.16.110.238:549/znkf_new"/></td></tr>
+               <tr><td>用户名:</td><td><input type="text" id="name2" value="znkf_new_user"/></td></tr>
+               <tr><td>密码:</td><td><input type="password" id="pwd2" value="LyTest,.2018"/></td></tr>
+           </table>
+           <button type="button" class="btn btn-success" onclick="Mysql2Connect()">测试连接</button>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10" style="margin:0 auto;float: none;">
+        <div class="col-md-5" style="margin-top:30px;">
+        <button type="button" class="btn btn-success" onclick="mysqlDif()">对比差异</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
